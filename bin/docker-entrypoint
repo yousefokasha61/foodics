@@ -8,6 +8,8 @@ fi
 
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+  # Remove stale PID file from previous crash/shutdown
+  rm -f tmp/pids/server.pid
   ./bin/rails db:prepare
 fi
 
