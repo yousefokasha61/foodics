@@ -66,8 +66,4 @@ yarn-debug.log*
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-<<<<<<< HEAD
 /public/uploads
-=======
-/public/uploads
->>>>>>> 065ca69 (init repo)
