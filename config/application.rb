@@ -17,5 +17,8 @@ module Foodics
 
     # API-only mode
     config.api_only = true
+
+    # Use Sidekiq for background jobs
+    config.active_job.queue_adapter = :sidekiq
   end
 end

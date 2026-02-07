@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.4"
 gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
+gem "sidekiq", "~> 7.3"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]

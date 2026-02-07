@@ -215,6 +215,8 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    redis-client (0.26.4)
+      connection_pool
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -265,6 +267,12 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    sidekiq (7.3.9)
+      base64
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     stringio (3.2.0)
     thor (1.5.0)
     timeout (0.6.0)
@@ -304,6 +312,7 @@ DEPENDENCIES
   rails (~> 8.0.4)
   rspec-rails
   rubocop-rails-omakase
+  sidekiq (~> 7.3)
   tzinfo-data
 
 BUNDLED WITH
