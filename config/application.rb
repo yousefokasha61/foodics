@@ -15,6 +15,13 @@ module Foodics
     config.load_defaults 8.0
     config.autoload_lib(ignore: %w[tasks])
 
+    # Autoload custom directories
+    config.autoload_paths += %W[
+      #{config.root}/app/api
+      #{config.root}/app/public
+      #{config.root}/app/lib
+    ]
+
     # API-only mode
     config.api_only = true
 

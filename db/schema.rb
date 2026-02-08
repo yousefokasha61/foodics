@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_07_171024) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_08_004504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_07_171024) do
     t.string "status", default: "PENDING", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "processing_errors", default: [], null: false
     t.index ["status"], name: "index_webhooks_on_status"
     t.index ["wallet_id", "status"], name: "index_webhooks_on_wallet_id_and_status"
     t.index ["wallet_id"], name: "index_webhooks_on_wallet_id"

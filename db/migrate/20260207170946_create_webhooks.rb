@@ -5,7 +5,6 @@ class CreateWebhooks < ActiveRecord::Migration[8.0]
       t.string :bank, null: false
       t.text :raw_payload, null: false
       t.string :status, null: false, default: "PENDING"
-      t.jsonb :errors, null: false, default: []
 
       t.timestamps
     end

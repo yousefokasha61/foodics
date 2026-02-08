@@ -24,15 +24,15 @@ class Webhook < ApplicationRecord
     update!(status: "PROCESSING")
   end
 
-  def mark_as_processed!(errors: [])
-    if errors.any?
-      update!(status: "PARTIALLY_PROCESSED", errors: errors)
+  def mark_as_processed!(processing_errors: [])
+    if processing_errors.any?
+      update!(status: "PARTIALLY_PROCESSED", processing_errors: processing_errors)
     else
       update!(status: "PROCESSED")
     end
   end
 
-  def mark_as_failed!(errors: [])
-    update!(status: "FAILED", errors: errors)
+  def mark_as_failed!(processing_errors: [])
+    update!(status: "FAILED", processing_errors: processing_errors)
   end
 end

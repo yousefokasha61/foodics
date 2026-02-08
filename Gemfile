@@ -5,6 +5,11 @@ gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "sidekiq", "~> 7.3"
 
+# dry-rb gems
+gem "dry-monads", "~> 1.6"
+gem "dry-validation", "~> 1.10"
+gem "dry-struct", "~> 1.6"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -15,6 +20,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
+  gem "dotenv-rails"
 end
 
 group :test do
