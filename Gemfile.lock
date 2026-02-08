@@ -362,6 +362,7 @@ DEPENDENCIES
   dry-struct (~> 1.6)
   dry-validation (~> 1.10)
   factory_bot_rails
+  nokogiri (~> 1.16)
   pg (~> 1.5)
   puma (>= 5.0)
   rails (~> 8.0.4)

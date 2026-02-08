@@ -5,6 +5,7 @@ gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "sidekiq", "~> 7.3"
 gem "redis", "~> 5.0"
+gem "nokogiri", "~> 1.16"
 
 # dry-rb gems
 gem "dry-monads", "~> 1.6"
