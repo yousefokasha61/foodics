@@ -5,15 +5,16 @@ module Pay
     class Service
       include Dry::Monads[:result]
 
-      def initialize(wallet_id: nil)
+      def initialize(wallet_id: nil, ingestion_cache: Ingestion::Cache.new)
         @wallet_id = wallet_id
+        @ingestion_cache = ingestion_cache
       end
 
       def create(params)
         ::Pay::Webhook::Contracts::CreateContract.new.call(params).bind do |validated_params|
           wallet_repository.find_one.bind do |wallet|
             repository.create(validated_params.merge(wallet_id: wallet.id)).bind do |webhook|
-              enqueue_processing(webhook)
+              maybe_enqueue_processing(webhook)
             end
           end
         end
@@ -46,9 +47,36 @@ module Pay
         Failure(::Api::Error.internal_server_error(e.message))
       end
 
+      # Enqueue all pending webhooks for processing (called when ingestion is re-enabled)
+      def enqueue_pending_webhooks
+        pending_webhooks = ::Webhook.pending
+        enqueued_count = 0
+
+        pending_webhooks.find_each do |webhook|
+          job = ProcessWebhookJob.perform_later(webhook.id)
+          enqueued_count += 1 if job.successfully_enqueued?
+        end
+
+        Success(enqueued_count)
+      end
+
       private
 
-      attr_reader :wallet_id
+      attr_reader :wallet_id, :ingestion_cache
+
+      def maybe_enqueue_processing(webhook)
+        # Check if ingestion is enabled
+        case ingestion_cache.enabled?
+        in Success(true)
+          enqueue_processing(webhook)
+        in Success(false)
+          # Ingestion disabled - webhook is saved but not enqueued
+          Success(webhook)
+        in Failure(_)
+          # Redis error - fail open, enqueue anyway
+          enqueue_processing(webhook)
+        end
+      end
 
       def enqueue_processing(webhook)
         job = ProcessWebhookJob.perform_later(webhook.id)

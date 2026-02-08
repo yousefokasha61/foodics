@@ -7,6 +7,7 @@ class ProcessWebhookJob < ApplicationJob
 
   def perform(webhook_id)
     result = Pay::Webhook::Service.new.process(webhook_id:)
+
     case result
     in Success(:already_processing)
       Rails.logger.info "Webhook #{webhook_id} is already being processed by another worker."
