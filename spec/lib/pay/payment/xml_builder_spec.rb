@@ -23,7 +23,7 @@ RSpec.describe Pay::Payment::XmlBuilder do
       let(:payment_request) do
         Pay::Payment::PaymentRequest.new(
           **base_attributes,
-          notes: ["Lorem Epsum", "Dolor Sit Amet"],
+          notes: [ "Lorem Epsum", "Dolor Sit Amet" ],
           payment_type: 421,
           charge_details: "RB"
         )
@@ -48,7 +48,7 @@ RSpec.describe Pay::Payment::XmlBuilder do
         expect(doc.at("receiverinfo beneficiaryname").text).to eq("Jane Doe")
 
         # Optional fields present
-        expect(doc.css("notes note").map(&:text)).to eq(["Lorem Epsum", "Dolor Sit Amet"])
+        expect(doc.css("notes note").map(&:text)).to eq([ "Lorem Epsum", "Dolor Sit Amet" ])
         expect(doc.at("paymenttype").text).to eq("421")
         expect(doc.at("chargedetails").text).to eq("RB")
       end
@@ -114,7 +114,7 @@ RSpec.describe Pay::Payment::XmlBuilder do
 
     context "with single note" do
       let(:payment_request) do
-        Pay::Payment::PaymentRequest.new(**base_attributes, notes: ["Single note"])
+        Pay::Payment::PaymentRequest.new(**base_attributes, notes: [ "Single note" ])
       end
 
       it "includes notes tag with one note" do

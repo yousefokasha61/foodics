@@ -10,6 +10,6 @@ class CreateWebhooks < ActiveRecord::Migration[8.0]
     end
 
     add_index :webhooks, :status
-    add_index :webhooks, [:wallet_id, :status]
+    add_index :webhooks, [ :wallet_id, :status ]
   end
 end

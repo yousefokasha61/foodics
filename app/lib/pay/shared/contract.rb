@@ -9,7 +9,7 @@ module Pay
         include Dry.Types()
       end
 
-      def call(args, context={})
+      def call(args, context = {})
         result = super(args, context)
         return Success(result.to_h) if result.success?
 

@@ -30,7 +30,7 @@ module Api
           :payment_type,
           :charge_details,
           notes: [],
-          receiver: [:bank_code, :account_number, :beneficiary_name]
+          receiver: [ :bank_code, :account_number, :beneficiary_name ]
         ).to_h.deep_symbolize_keys
       end
     end

@@ -37,7 +37,7 @@ module Pay
         return {} if metadata_str.nil? || metadata_str.empty?
 
         metadata_str.split("/").each_slice(2).to_h do |key, value|
-          [key.to_s, value.to_s]
+          [ key.to_s, value.to_s ]
         end
       end
 

@@ -15,7 +15,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
         },
         amount: 177.39,
         currency: "SAR",
-        notes: ["Lorem Epsum", "Dolor Sit Amet"],
+        notes: [ "Lorem Epsum", "Dolor Sit Amet" ],
         payment_type: 421,
         charge_details: "RB"
       }
@@ -73,7 +73,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
 
         doc = Nokogiri::XML(response.body)
 
-        expect(doc.css("notes note").map(&:text)).to eq(["Lorem Epsum", "Dolor Sit Amet"])
+        expect(doc.css("notes note").map(&:text)).to eq([ "Lorem Epsum", "Dolor Sit Amet" ])
       end
 
       it "includes payment type when not default" do
