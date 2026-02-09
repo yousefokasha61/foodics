@@ -6,7 +6,7 @@ class ProcessWebhookJob < ApplicationJob
   queue_as :default
 
   def perform(webhook_id)
-    result = Pay::Webhook::Service.new.process(webhook_id:)
+    result = ::Pay::Webhook::Service.new.process(webhook_id:)
 
     case result
     in Success(:already_processing)

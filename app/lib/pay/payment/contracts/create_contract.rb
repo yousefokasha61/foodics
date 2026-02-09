@@ -25,7 +25,7 @@ module Pay
           if result.success?
             Success(result.to_h)
           else
-            Failure(::Api::Error.unprocessable_entity(message: result.errors.to_h.to_json))
+            Failure(::Api::Error.unprocessable_entity(result.errors.to_h.to_json))
           end
         end
       end

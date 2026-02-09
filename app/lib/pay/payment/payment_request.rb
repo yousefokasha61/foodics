@@ -7,7 +7,7 @@ module Pay
       attribute :reference, Types::String
       attribute :date, Types::String
       attribute :amount, Types::Coercible::Float
-      attribute :currency, Types::String.default("SAR")
+      attribute :currency, Types::String.default("EGP")
 
       # Sender info
       attribute :sender_account_number, Types::String
