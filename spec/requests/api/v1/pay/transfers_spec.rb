@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe "Api::V1::Payments", type: :request do
+RSpec.describe "Api::V1::Pay::Transfers", type: :request do
   let!(:wallet) { create(:wallet) }
 
-  describe "POST /api/v1/wallets/:wallet_id/payments" do
+  describe "POST /api/v1/pay/transfers/:wallet_id" do
     let(:valid_params) do
       {
         receiver: {
@@ -23,7 +23,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
 
     context "with valid params including all optional fields" do
       it "returns XML response" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "generates valid XML structure" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -45,7 +45,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "includes sender account from wallet" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -55,7 +55,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "includes receiver info from params" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -67,7 +67,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "includes notes when provided" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -77,7 +77,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "includes payment type when not default" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -87,7 +87,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "includes charge details when not default" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: valid_params,
              as: :json
 
@@ -110,7 +110,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "returns XML response" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: minimal_params,
              as: :json
 
@@ -118,7 +118,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "omits notes tag" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: minimal_params,
              as: :json
 
@@ -128,7 +128,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "omits paymenttype tag (default 99)" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: minimal_params,
              as: :json
 
@@ -138,7 +138,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "omits chargedetails tag (default SHA)" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: minimal_params,
              as: :json
 
@@ -148,7 +148,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "uses SAR as default currency" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: minimal_params,
              as: :json
 
@@ -160,7 +160,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
 
     context "with invalid params" do
       it "returns error when receiver is missing" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: { amount: 100.0 },
              as: :json
 
@@ -168,7 +168,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "returns error when amount is missing" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: {
                receiver: {
                  bank_code: "FDCSSARI",
@@ -182,7 +182,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "returns error when amount is zero" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: {
                receiver: {
                  bank_code: "FDCSSARI",
@@ -197,7 +197,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
       end
 
       it "returns error when amount is negative" do
-        post "/api/v1/wallets/#{wallet.id}/payments",
+        post "/api/v1/pay/transfers/#{wallet.id}",
              params: {
                receiver: {
                  bank_code: "FDCSSARI",
@@ -214,7 +214,7 @@ RSpec.describe "Api::V1::Payments", type: :request do
 
     context "with non-existent wallet" do
       it "returns not found error" do
-        post "/api/v1/wallets/999999/payments",
+        post "/api/v1/pay/transfers/999999",
              params: valid_params,
              as: :json
 
