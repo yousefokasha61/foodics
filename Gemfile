@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.4"
 gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
-gem "sidekiq", "~> 7.3"
+gem "sidekiq", "~> 8.1"
 gem "redis", "~> 5.0"
 gem "nokogiri", "~> 1.16"
 
