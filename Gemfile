@@ -10,7 +10,7 @@ gem "nokogiri", "~> 1.16"
 # dry-rb gems
 gem "dry-monads", "~> 1.6"
 gem "dry-validation", "~> 1.10"
-gem "dry-struct", "~> 1.6"
+gem "dry-struct", "~> 1.8"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
